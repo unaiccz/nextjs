@@ -1,3 +1,4 @@
+const Usuario = require('../models/Usuarios');
 const resolvers = {
 
 
@@ -7,7 +8,24 @@ const resolvers = {
         getcurso : () => "hola"
     },
     Mutation : {
-        nuevouser : () => "adding user"
+        nuevouser : async (_,{input}) => {
+            const {email, password} = input;
+            //revisar
+ const exist  =  await Usuario.findOne({email});
+ console.log(exist);
+            if(exist){
+                throw new Error('El usuario ya esta registrado');
+            }
+            //hash
+            //guardar
+        try {
+const usuario = new Usuario(input);
+usuario.save();
+return usuario;
+        } catch (error) {
+            console.log(error);
+        }
+        }
     }
 }
 module.exports = resolvers

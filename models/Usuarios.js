@@ -25,4 +25,4 @@ creado : {
 
 
 });
-module.exports = mongoose.model('Usuario'. Userschema);
+module.exports = mongoose.model('Usuario', Userschema);
